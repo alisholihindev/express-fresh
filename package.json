@@ -9,8 +9,8 @@
     "build": "tdc",
     "format": "prettier --write .",
     "husky": "husky install",
-    "check-types": "tsc --pretty --noEmmit",
-    "check-format": "prettier check .",
+    "check-types": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js"
   },
   "husky": {
