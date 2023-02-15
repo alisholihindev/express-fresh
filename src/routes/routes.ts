@@ -1,7 +1,6 @@
 import { Application, Router } from 'express'
-import { UserRouter } from '../app/user/userRouter'
 
-const _routes: Array<[string, Router]> = [['/user', UserRouter]]
+const _routes: Array<[string, Router]> = []
 
 export const routes = (app: Application) => {
   _routes.forEach((route) => {
