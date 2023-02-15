@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
 import connection from '../config/dbConnect'
-import { RoleAttributes, RoleInput } from '../interfaces/user.interface'
+import { RoleAttributes, RoleInput } from '../interfaces/RoleInterface'
 
 class Role extends Model<RoleAttributes, RoleInput> implements RoleAttributes {
   public id!: number
