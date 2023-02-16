@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { logger } from '../utils/logger'
-import Role from '../models/role'
 import { createRoleValidation, updateRoleValidation } from '../validation/RoleValidation'
+import Role from '../models/role'
 
 export const GetRole = async (req: Request, res: Response) => {
   try {
@@ -135,6 +135,44 @@ export const DeleteRole = async (req: Request, res: Response) => {
       status: 200,
       message: 'Deleted',
       data: null
+    })
+  } catch (error: any) {
+    if (error != null && error instanceof Error) {
+      return res.status(500).send({
+        status: 500,
+        message: error.message,
+        errors: error
+      })
+    }
+
+    return res.status(500).send({
+      status: 500,
+      message: 'internal server error',
+      error: error
+    })
+  }
+}
+
+export const GetRoleById = async (req: Request, res: Response) => {
+  const {
+    params: { id }
+  } = req
+
+  try {
+    const role = await Role.findByPk(id)
+
+    if (role == null) {
+      return res.status(404).send({
+        status: 404,
+        message: 'Data not found',
+        data: null
+      })
+    }
+
+    return res.status(200).send({
+      status: 200,
+      message: 'OK',
+      data: role
     })
   } catch (error: any) {
     if (error != null && error instanceof Error) {

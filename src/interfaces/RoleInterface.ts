@@ -1,7 +1,7 @@
 import { Optional } from 'sequelize'
 
 export interface RoleAttributes {
-  id?: number
+  id?: string
   roleName?: string | null
   active?: boolean | null
 

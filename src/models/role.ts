@@ -3,7 +3,7 @@ import connection from '../config/dbConnect'
 import { RoleAttributes, RoleInput } from '../interfaces/RoleInterface'
 
 class Role extends Model<RoleAttributes, RoleInput> implements RoleAttributes {
-  public id!: number
+  public id!: string
   public roleName!: string
   public active!: boolean
 
@@ -15,9 +15,9 @@ Role.init(
   {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.BIGINT
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
     roleName: {
       allowNull: true,
