@@ -2,6 +2,30 @@ import { DataTypes, Model } from 'sequelize'
 import connection from '../config/dbConnect'
 import { RoleAttributes, RoleInput } from '../interfaces/RoleInterface'
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Role:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *       properties:
+ *         id:
+ *           type: Integer
+ *           description: The auto-generated id of the Role
+ *         roleName:
+ *           type: string
+ *           description: The name of the Role
+ *         active:
+ *           type: boolean
+ *           description: Role Status
+ *       example:
+ *         id: 3
+ *         roleName: admin
+ *         active: 1
+ */
 class Role extends Model<RoleAttributes, RoleInput> implements RoleAttributes {
   public id!: string
   public roleName!: string

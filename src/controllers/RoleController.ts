@@ -3,6 +3,31 @@ import { logger } from '../utils/logger'
 import { createRoleValidation, updateRoleValidation } from '../validation/RoleValidation'
 import Role from '../models/role'
 
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Roles
+ *   description: The Role API
+ */
+
+/**
+ * @swagger
+ * /roles:
+ *   get:
+ *     summary: Get all Roles
+ *     tags: [Roles]
+ *     responses:
+ *       200:
+ *         description: The list of all Roles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Role'
+ */
 export const GetRole = async (req: Request, res: Response) => {
   try {
     const roles = await Role.findAll({
@@ -32,6 +57,28 @@ export const GetRole = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * @swagger
+ * /roles:
+ *   post:
+ *     summary: Create a new role
+ *     tags: [Roles]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Role'
+ *     responses:
+ *       200:
+ *         description: The role was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Role'
+ *       400:
+ *         description: Invalid role data
+ */
 export const CreateRole = async (req: Request, res: Response) => {
   const { error, value } = createRoleValidation(req.body)
   if (error != null) {
@@ -63,6 +110,38 @@ export const CreateRole = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * @swagger
+ * /roles/{id}:
+ *   put:
+ *     summary: Update the role by the id
+ *     tags: [Roles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The role id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Role'
+ *     responses:
+ *       200:
+ *         description: The role was updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Role'
+ *       404:
+ *         description: The role was not found
+ *       500:
+ *         description: Some error happened
+ *
+ */
 export const UpdateRole = async (req: Request, res: Response) => {
   const {
     params: { id }
@@ -113,6 +192,27 @@ export const UpdateRole = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * @swagger
+ * /roles/{id}:
+ *   delete:
+ *     summary: Remove the role by id
+ *     tags: [Roles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The role id
+ *
+ *     responses:
+ *       200:
+ *         description: The role was deleted
+ *       404:
+ *         description: The role was not found
+ */
+
 export const DeleteRole = async (req: Request, res: Response) => {
   const {
     params: { id }
@@ -152,6 +252,30 @@ export const DeleteRole = async (req: Request, res: Response) => {
     })
   }
 }
+
+/**
+ * @swagger
+ * /roles/{id}:
+ *   get:
+ *     summary: Get role by id
+ *     tags: [Roles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The role id
+ *     responses:
+ *       200:
+ *         description: The role description by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Role'
+ *     404:
+ *         description: The role was not found
+ */
 
 export const GetRoleById = async (req: Request, res: Response) => {
   const {
